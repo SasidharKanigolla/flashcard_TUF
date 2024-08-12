@@ -19,7 +19,7 @@ const Flashcard = () => {
       console.log(data);
       setFlashcards(data);
     } catch (error) {
-      console.error("Error fetching flashcards:", error);
+      console.error("Error  flashcards:", error);
     }
   };
 

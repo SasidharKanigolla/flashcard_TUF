@@ -1,10 +1,10 @@
 const mysql = require("mysql2");
 const { URL } = require("url");
 
-// Load environment variables
+
 require("dotenv").config();
 
-// Parse the DATABASE_URL
+
 const databaseUrl = process.env.DATABASE_URL;
 const url = new URL(databaseUrl);
 
@@ -13,10 +13,9 @@ const db = mysql.createConnection({
   port: url.port,
   user: url.username,
   password: url.password,
-  database: url.pathname.slice(1), // Remove the leading '/'
+  database: url.pathname.slice(1), 
 });
 
-// Connect to the database
 db.connect((err) => {
   if (err) {
     console.error("Error connecting to the database:", err);
@@ -25,7 +24,7 @@ db.connect((err) => {
   console.log("Connected to the database");
 });
 
-// Example query
+
 db.query("SELECT * FROM flashcards", (err, results) => {
   if (err) {
     console.error("Error fetching flashcards:", err);
@@ -34,5 +33,5 @@ db.query("SELECT * FROM flashcards", (err, results) => {
   console.log("Fetched flashcards:", results);
 });
 
-// Export the connection
+
 module.exports = db;

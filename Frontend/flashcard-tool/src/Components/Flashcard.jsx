@@ -6,8 +6,7 @@ const Flashcard = () => {
   const [flashcards, setFlashcards] = useState([]);
   const [flipped, setFlipped] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
-  const [darkMode, setDarkMode] = useState(true); // State for dark mode
-
+  const [darkMode, setDarkMode] = useState(true); 
   useEffect(() => {
     fetchData();
   }, []);

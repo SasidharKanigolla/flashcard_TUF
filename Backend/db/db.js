@@ -1,9 +1,7 @@
 const mysql = require("mysql2");
 const { URL } = require("url");
 
-
 require("dotenv").config();
-
 
 const databaseUrl = process.env.DATABASE_URL;
 const url = new URL(databaseUrl);
@@ -13,7 +11,10 @@ const db = mysql.createConnection({
   port: url.port,
   user: url.username,
   password: url.password,
-  database: url.pathname.slice(1), 
+  database: url.pathname.slice(1),
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
 db.connect((err) => {
@@ -24,7 +25,6 @@ db.connect((err) => {
   console.log("Connected to the database");
 });
 
-
 db.query("SELECT * FROM flashcards", (err, results) => {
   if (err) {
     console.error("Error fetching flashcards:", err);
@@ -32,6 +32,5 @@ db.query("SELECT * FROM flashcards", (err, results) => {
   }
   console.log("Fetched flashcards:", results);
 });
-
 
 module.exports = db;
